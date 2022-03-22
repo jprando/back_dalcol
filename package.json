@@ -1,0 +1,14 @@
+{
+  "name": "back_dalcol",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.1.0"
+  }
+}
