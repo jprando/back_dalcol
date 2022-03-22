@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       /// o ideal é tu pegar o que tu quer do objeto diretamente e gerar
       /// o json no formato correto do json
       /// ou usar uma lib com opcao de tu informar um schema para ela fazer isso
-      /// pra voce, automativo e generico é sempre a opcao mais lenta
+      /// pra voce, automatico e generico é sempre a opcao mais lenta
       /// quando o assunto é gerar um json
       res.write(JSON.stringify(hit));
     }
