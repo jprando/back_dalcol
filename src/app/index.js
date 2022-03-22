@@ -2,7 +2,7 @@ const { es, querys } = require("./db");
 const { accessLog } = querys;
 
 const ignoreFaviconRequest = (req, res) => {
-  if (req.method === "GET" && req.url === "/favicon.ico") {
+  if (req.url === "/favicon.ico") {
     res.writeHead(204).end();
   }
 };
