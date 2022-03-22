@@ -10,6 +10,8 @@ Em um terminal, entre na pasta deste projeto e execute:
 make elasticsearch
 # Em outro terminal ou aba
 make kibana
+# Em outro terminal ou aba
+npm install
 ```
 
 Depois acesse:  
