@@ -51,6 +51,14 @@ make stop.all
 
 Para parar e encerrar os container utilizado.
 
+## COMENTARIO
+
+`JSON.stringify` é lento pra xuxu, o ideal é tu pegar o que tu quer do objeto diretamente e gerar o json seguindo corretamente todas as especificacoes do formato json.
+
+Ou usar uma lib com opcao de tu informar um schema, referente as informacoes que tu quer extrair do objeto javascript, para simplificar e tornar o processo de fazer manutencao no codigo algo mais simples.
+
+Gerar json de forma automatica e generica é sempre a opcao mais lenta, quando o assunto é gerar um json
+
 ## REFERENCIA
 
 `https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/scroll_examples.html`

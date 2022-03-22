@@ -6,7 +6,7 @@ KIBANA_CONTAINER_NAME=dev-kibana-srv
 KIBANA_PORT=5601
 
 elasticsearch:
-	-@docker network create ${DEV_NETWORK}
+	-@docker network create ${DEV_NETWORK} &> /dev/null
 	@sleep 2
 	docker run --rm -ti --name ${ES_CONTAINER_NAME} --hostname ${ES_CONTAINER_NAME} \
 		-e "xpack.security.enabled=false" -e "discovery.type=single-node" \
@@ -15,7 +15,7 @@ elasticsearch:
 	docker.io/elasticsearch:8.1.0
 
 kibana:
-	-@docker network create ${DEV_NETWORK}
+	-@docker network create ${DEV_NETWORK} &> /dev/null
 	@sleep 2
 	docker run --rm -ti --name ${KIBANA_CONTAINER_NAME} --hostname ${KIBANA_CONTAINER_NAME} \
 		-e "ELASTICSEARCH_HOSTS=http://${ES_CONTAINER_NAME}:9200" \
@@ -24,7 +24,13 @@ kibana:
 	docker.io/kibana:8.1.0
 
 stop.all:
-	-docker stop ${KIBANA_CONTAINER_NAME}
-	-docker stop ${ES_CONTAINER_NAME}
+	-@docker stop ${KIBANA_CONTAINER_NAME} &> /dev/null
+	-@docker stop ${ES_CONTAINER_NAME} &> /dev/null
 	@sleep 2
-	docker network rm ${DEV_NETWORK}
+	@docker network rm ${DEV_NETWORK} &> /dev/null
+
+dev:
+	npm run dev
+
+start:
+	npm start

@@ -1,7 +1,19 @@
-const { es } = require("./db");
-const { accessLog } = require("./query");
+const { es, querys } = require("./db");
+const { accessLog } = querys;
+
+const ignoreFaviconRequest = (req, res) => {
+  if (req.method === "GET" && req.url === "/favicon.ico") {
+    res.writeHead(204).end();
+  }
+};
 
 module.exports = async (req, res) => {
+  ignoreFaviconRequest(req, res);
+
+  if (res.finished) {
+    return;
+  }
+
   res.setHeader("Content-Type", "application/json");
   res.flushHeaders();
 
@@ -22,22 +34,16 @@ module.exports = async (req, res) => {
       } else {
         isFirst = false;
       }
-      /// JSON.stringify é lento pra xuxu
-      /// o ideal é tu pegar o que tu quer do objeto diretamente e gerar
-      /// o json no formato correto do json
-      /// ou usar uma lib com opcao de tu informar um schema para ela fazer isso
-      /// pra voce, automatico e generico é sempre a opcao mais lenta
-      /// quando o assunto é gerar um json
-      res.write(JSON.stringify(hit));
+      res.write(JSON.stringify(hit)); // confira o comentario no README
     }
 
     if (!searchResponse._scroll_id) {
       break;
     }
 
-    searchResponse = await client.scroll({
-      scrollId: searchResponse._scroll_id,
-      scroll: params.scroll,
+    res.searchResponse = await es.scroll({
+      scroll_id: searchResponse._scroll_id,
+      scroll: searchResponse.scroll || '10s',
     });
   }
   res.write("]");

@@ -1,0 +1,10 @@
+{
+  "index": "kibana_sample_data_logs",
+  "scroll": "10s",
+  "size": 1024,
+  "body": {
+    "query": {
+      "match_all": {}
+    }
+  }
+}

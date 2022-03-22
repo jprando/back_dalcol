@@ -1,3 +1,4 @@
 module.exports = {
-    ...require('./es')
+    ...require('./es'),
+    ...require('./querys')
 }
